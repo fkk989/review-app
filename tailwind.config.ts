@@ -16,6 +16,9 @@ const config: Config = {
         tab: "1200px",
         pc: "1600px",
       },
+      colors: {
+        instaGradient: "linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7)",
+      },
     },
   },
   darkMode: "class",

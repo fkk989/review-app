@@ -11,9 +11,12 @@ export function SocialButtons() {
         onClick={() => {
           navgate.push("/services/instagram");
         }}
-        className="bg-[#C243F4] w-[180px] h-[60px] font-[600] text-white"
+        className="w-[180px] h-[60px] font-[600] text-white"
         radius={"full"}
         startContent={<FaInstagram />}
+        style={{
+          background: "linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7)",
+        }}
       >
         Instagram Services
       </Button>

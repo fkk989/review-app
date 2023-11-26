@@ -14,6 +14,7 @@ import {
   FaUserAlt,
   FaYoutube,
 } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
 export default function Home() {
   const socialCardObj: Array<{
     title: string;
@@ -98,14 +99,14 @@ export default function Home() {
   return (
     <main className="w-screen flex flex-col  items-center  bg-white text-[#383838] dark:bg-black dark:text-white">
       {/* heading */}
-      <div className="flex justify-center items-center gap-[20px] mt-[100px]">
-        <h1 className="capitalize text-[50px] font-bold">
+      <div className="flex justify-center items-center gap-[20px] mt-[40px] mobile:mt-[100px]">
+        <h1 className="capitalize text-[27px] mobile:text-[50px] font-bold">
           lets grow your socials
         </h1>
         <Image src="/love.png" width={50} height={50} radius="none" />
       </div>
       {/* para */}
-      <div className="w-[35vw] text-center mt-[15px]">
+      <div className=" w-[81vw] mobile:w-[35vw] text-center mt-[15px]">
         Growing your social media should mean using a reputable company who can
         get you results. This is why we started Growthoid. Choose below what
         platform you want to grow.
@@ -114,19 +115,18 @@ export default function Home() {
       {/* services button */}
       <SocialButtons />
       {/* rating */}
-      <div className="mt-[20px]">
+      <div className="max-mobile:w-[80vw] text-center mt-[20px]">
         ⚡ Rated 4.7/5 Stars & serving happy customers since 2013
       </div>
 
-      {/* list of services */}
-      <div className="flex justify-center items-center gap-[20px] mt-[100px]">
-        <h2 className="capitalize text-[30px] font-bold">
+      <div className=" flex  max-mobile:flex-col text-center justify-center items-center gap-[20px] mt-[100px]">
+        <h2 className="capitalize text-[20px] mobile:text-[30px] font-bold w-[80vw]">
           you just create the account and leave the rest to us
         </h2>
         <Image src="/brainbulb.png" width={50} height={50} radius="none" />
       </div>
       {/* para */}
-      <div className="w-[50vw] text-center mt-[15px]">
+      <div className="w-[80vw] mobile:w-[50vw] text-center mt-[15px]">
         Our clients asked, and we listened! We now support other popular social
         platforms helping you grow your followers likes, views and more on other
         major social medias like: Instagram, TikTok, YouTube and more!
@@ -157,9 +157,16 @@ export default function Home() {
       {/* most used services */}
       <div className="flex flex-col justify-center items-center gap-[10px] mt-[100px]">
         <h2 className="capitalize text-[30px] font-bold">Most used services</h2>
-        <Image width={100} height={40} src="/instalogo.png" radius="none" />
+        <div
+          className="flex justify-center items-center rounded-md w-[60px] h-[60px] mobile:w-[90px] mobile:h-[90px]"
+          style={{
+            background: "linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7)",
+          }}
+        >
+          <FaInstagram className="w-[50px] h-[50px] mobile:w-[80px] mobile:h-[80px] text-white " />
+        </div>
 
-        <div className="flex gap-[25px] mt-[20px]">
+        <div className="flex max-mobile:flex-col gap-[25px] mt-[20px]">
           <SocialCard
             key={"insta-followers"}
             width="220px"

@@ -7,6 +7,7 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
+  Button,
 } from "@nextui-org/react";
 import { FireIcon } from "@heroicons/react/24/solid";
 import { AvatarDropDown } from "./nav/AvatarDropDown";
@@ -19,14 +20,12 @@ export function NavBar() {
   const param = usePathname();
   const navigate = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  // {path === "/services"  ||  path === `/services/${param}` ? "secondary" : "foreground"}
   return (
     <Navbar
-      isBlurred
+      shouldHideOnScroll
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className=" text-white"
     >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle

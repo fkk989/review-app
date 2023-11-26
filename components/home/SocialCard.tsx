@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 interface SocialCardProp {
   width: string;
   height: string;
+  mobileWidth?: string;
+  mobileHeight?: string;
   title: string;
   icon: React.ReactNode;
   param: string;
@@ -24,6 +26,8 @@ interface SocialCardProp {
 export function SocialCard({
   width,
   height,
+  mobileWidth,
+  mobileHeight,
   title,
   icon,
   param,
@@ -40,7 +44,7 @@ export function SocialCard({
       }}
       isFooterBlurred
       radius="lg"
-      className="border-none  col-span-6 mobile:col-span-3 cursor-pointer"
+      className={`border-none  col-span-6 mobile:col-span-3 cursor-pointer ${mobileWidth} ${mobileHeight}`}
     >
       <div
         className=" flex justify-center  items-start"
