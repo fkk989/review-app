@@ -100,7 +100,7 @@ export default function Home() {
     <main className="w-screen flex flex-col  items-center  bg-white text-[#383838] dark:bg-black dark:text-white">
       {/* heading */}
       <div className="flex justify-center items-center gap-[20px] mt-[40px] mobile:mt-[100px]">
-        <h1 className="capitalize text-[27px] mobile:text-[50px] font-bold">
+        <h1 className="capitalize text-[22px] mobile:text-[50px] font-bold">
           lets grow your socials
         </h1>
         <Image src="/love.png" width={50} height={50} radius="none" />
