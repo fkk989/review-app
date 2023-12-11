@@ -1,25 +1,66 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarMenuToggle,
   NavbarContent,
   NavbarItem,
-  Link,
-  Button,
-} from "@nextui-org/react";
+} from "@nextui-org/navbar";
+
 import { FireIcon } from "@heroicons/react/24/solid";
 import { AvatarDropDown } from "./nav/AvatarDropDown";
 import { ThemeSwitcher } from "./buttons/ThemeSwitcher";
 import { NavMenu } from "./nav/NavMenu";
 import { usePathname, useParams, useRouter } from "next/navigation";
+import { ServiceDropdown } from "./nav/ServiceDropdown";
+import { Button } from "@nextui-org/react";
+import { useRecoilValue } from "recoil";
+import { adminAtom, userAtom } from "@/store";
+import { useQueryClient } from "@tanstack/react-query";
+import { Admin, User } from "@prisma/client";
 
 export function NavBar() {
+  const queryClient = useQueryClient();
+  const adminData = queryClient.getQueryData(["get-admin"]) as { admin: Admin };
+  const userData = queryClient.getQueryData(["get-user"]) as { user: User };
+
   const path = usePathname();
   const param = usePathname();
   const navigate = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const isUser = useRecoilValue(userAtom);
+  const isAdmin = useRecoilValue(adminAtom);
+
+  const navItemObj: Array<{
+    component?: React.ReactNode;
+    title?: string;
+    linkPath: string;
+  }> = [
+    {
+      component: <ServiceDropdown />,
+      title: "services",
+      linkPath: "services",
+    },
+    {
+      title: "customer review",
+      linkPath: "review",
+    },
+    {
+      title: "my order",
+      linkPath: "orders",
+    },
+    {
+      title: "support",
+      linkPath: "support",
+    },
+    {
+      title: "get started",
+      linkPath: "getstarted",
+    },
+  ];
+
   return (
     <Navbar
       shouldHideOnScroll
@@ -45,9 +86,7 @@ export function NavBar() {
             height={25}
             className="text-black dark:text-white"
           />
-          <p className="font-bold text-inherit text-black dark:text-white">
-            ACME
-          </p>
+          <p className="font-bold  text-black dark:text-white">ACME</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -63,57 +102,72 @@ export function NavBar() {
             height={25}
             className="text-black dark:text-white"
           />
-          <p className="font-bold text-inherit text-black dark:text-white">
-            ACME
-          </p>
+          <p className="font-bold  text-black dark:text-white">ACME</p>
         </NavbarBrand>
 
-        <NavbarItem
-          isActive={
-            path === "/services" || path === `/services/${param}` ? true : false
+        {navItemObj.map(({ component, title, linkPath }) => {
+          if (!component) {
+            return (
+              <NavbarItem
+                key={title}
+                onClick={() => {
+                  navigate.push(`/${linkPath}`);
+                }}
+                isActive={path === `/${path}` ? true : false}
+                className={`${
+                  path === `/${linkPath}` ||
+                  linkPath === `/${linkPath}/${param}`
+                    ? "text-purple-500"
+                    : "text-black dark:text-white"
+                } cursor-pointer`}
+              >
+                {title}
+              </NavbarItem>
+            );
+          } else {
+            return (
+              <NavbarItem
+                key={title}
+                isActive={linkPath === `/${linkPath}` ? true : false}
+              >
+                {component}
+              </NavbarItem>
+            );
           }
-        >
-          Services
-        </NavbarItem>
-        <NavbarItem isActive={path === "/review" ? true : false}>
-          <Link
-            href="review"
-            color={path === "/review" ? "secondary" : "foreground"}
-          >
-            Customer Review
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={path === "/order" ? true : false}>
-          <Link
-            href="order"
-            color={path === "/order" ? "secondary" : "foreground"}
-          >
-            Check Order
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={path === "/support" ? true : false}>
-          <Link
-            href="support"
-            color={path === "/support" ? "secondary" : "foreground"}
-          >
-            Support
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={path === "/getstarted" ? true : false}>
-          <Link
-            href="getstarted"
-            color={path === "/getstarted" ? "secondary" : "foreground"}
-          >
-            Get Started
-          </Link>
-        </NavbarItem>
+        })}
       </NavbarContent>
 
       <NavbarContent justify="end">
+        <NavbarItem className="max-mobile:hidden">
+          {adminData && `hello ${adminData.admin.name.split(" ")[0]}`}
+          {userData && `hello ${userData.user.name.split(" ")[0]}`}
+        </NavbarItem>
         <AvatarDropDown />
         <div className="hidden mobile:block">
           <ThemeSwitcher />
         </div>
+        {!isUser && !isAdmin && (
+          <>
+            <Button
+              onClick={() => {
+                navigate.push("/login");
+              }}
+              color={"primary"}
+              className="max-mobile:hidden"
+            >
+              Log in
+            </Button>
+            <Button
+              onClick={() => {
+                navigate.push("/signup");
+              }}
+              color={"primary"}
+              className="max-mobile:hidden"
+            >
+              Sign up
+            </Button>
+          </>
+        )}
       </NavbarContent>
 
       {/* nav menu in mobile */}

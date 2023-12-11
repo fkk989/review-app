@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./Provider";
-import { NavBar } from "@/components";
+import { Footer, NavBar } from "@/components";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,11 +19,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          defer
+        ></script>
+      </head>
       <body className={`${inter.className}  `}>
         <Providers>
           <NavBar />
-
           {children}
+          <footer className="bg-white dark:bg-black pt-[100px]">
+            <Footer />
+          </footer>
+          <Toaster position="top-right" reverseOrder={false} />
         </Providers>
       </body>
     </html>

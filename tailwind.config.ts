@@ -14,7 +14,7 @@ const config: Config = {
       screens: {
         mobile: "500px",
         tab: "1200px",
-        pc: "1600px",
+        pc: "1500px",
       },
       colors: {
         instaGradient: "linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7)",

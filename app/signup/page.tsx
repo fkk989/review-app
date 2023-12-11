@@ -1,11 +1,10 @@
+import { UserSignup } from "@/components";
 import React from "react";
 
-function SignUp() {
+export default function SignUp() {
   return (
-    <div>
-      <div>Sign up</div>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <UserSignup />
     </div>
   );
 }
-
-export default SignUp;

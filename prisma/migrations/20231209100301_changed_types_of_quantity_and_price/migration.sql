@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "quantity" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Service" ALTER COLUMN "quantity" SET DATA TYPE TEXT,
+ALTER COLUMN "price" SET DATA TYPE TEXT;

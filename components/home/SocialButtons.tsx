@@ -6,7 +6,7 @@ export function SocialButtons() {
   const navgate = useRouter();
 
   return (
-    <div className="w-[60vw] flex flex-wrap justify-center gap-[10px] mobile:justify-between items-center mt-[50px] ">
+    <div className="w-[60vw] flex flex-wrap  gap-[10px] justify-center  items-center mt-[50px] ">
       <Button
         onClick={() => {
           navgate.push("/services/instagram");
